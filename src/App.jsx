@@ -24,7 +24,7 @@ import {
   WistList
 } from "./pages";
 import { ToastContainer } from "react-toastify";
-import { adminProductLoader } from "./loader";
+import { adminProductLoader,adminCategoryLoader} from "./loader";
 
 const router = createBrowserRouter([
   {
@@ -63,7 +63,8 @@ const router = createBrowserRouter([
       },
       {
         path: Router.admin.category.home,
-        element: <CategoryManagement />
+        element: <CategoryManagement />,
+        loader: adminCategoryLoader
       },
       {
         path: Router.admin.category.add,
@@ -71,7 +72,7 @@ const router = createBrowserRouter([
       },
       {
         path: Router.admin.category.edit,
-        element: <EditCategory />
+        element: <EditCategory />,
       },
       {
         path: Router.admin.product.home,

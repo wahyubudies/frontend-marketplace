@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const getTypeRequest = (type) => {
     switch (type) {
@@ -28,6 +29,8 @@ const standardResponse = ({
 };
 
 const sendRequest = ({ method, url, data, type, params }) => {
+    const token = JSON.parse(Cookies.get("userInfo")).token ?? null;
+
     return new Promise((resolve, reject) => {
         axios({
             method,
@@ -35,10 +38,10 @@ const sendRequest = ({ method, url, data, type, params }) => {
             data,
             params,
             headers: {
-                'Content-Type': getTypeRequest(type)
+                'Content-Type': getTypeRequest(type),
+                'Authorization': `Bearer ${token}`
             }
-        })
-            .then(response => {
+        }).then(response => {
                 resolve(response);
             })
             .catch(error => {
