@@ -94,14 +94,6 @@ const getDetailCategory = async ({ id, setDetail }) => {
     }
 }
 
-const deleteCategory = async (id) => {
-    try {
-        const data = await Category.deleteCategory(id);
-        return data;
-    } catch (error) {
-      return error
-    }
-}
 
 const Action = {
     onChangeField,
@@ -109,7 +101,6 @@ const Action = {
     onSubmit,
     getDetailCategory,
     onUpdate,
-    deleteCategory
 };
 
 export default Action;
