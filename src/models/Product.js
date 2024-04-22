@@ -140,10 +140,7 @@ const editProductItem = async (data) => {
 const deleteProductItem = async (idProduct) => {
     const response = await RequestUtility.sendRequest({
         method: 'delete',
-        url: SERVER_ENDPOINT + "/merchant/product/" + idProduct,
-        params: {},
-        data: null,
-        type: "json"
+        url: SERVER_ENDPOINT + "/merchant/product/" + idProduct
     });
 
     let result = {};
