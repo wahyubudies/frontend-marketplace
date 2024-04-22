@@ -1,9 +1,9 @@
-const getListDropdown = () => {
+import Category from '../../models/Category'
 
+const adminCategoryLoader = async () => {
+    const reply = await Category.getListTable();
+    return reply.data;
 };
 
-const adminCategoryLoader = () => {
-    getListDropdown;
-};
 
 export default adminCategoryLoader;
