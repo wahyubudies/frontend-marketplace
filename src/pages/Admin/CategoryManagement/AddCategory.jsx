@@ -38,7 +38,6 @@ const AddCategory = () => {
                         onChange={(e) => Action.onChangeFile({ e, form, setForm })}
                         className='w-full bg-[#f1f1f1] px-4 py-1.5 rounded mt-2' />
                 </div>
-
             </div>
             <div className="flex items-center mt-6">
                 <NavLink to={Router.admin.category.home} className='bg-slate-400 hover:bg-black text-white font-bold py-2 px-4 rounded-2xl mr-3'>

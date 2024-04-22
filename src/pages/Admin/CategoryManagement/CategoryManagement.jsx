@@ -3,10 +3,10 @@ import { Headline } from '../../../components';
 import DataTable from 'react-data-table-component';
 import Router from '../../../route/router';
 import Swal from 'sweetalert2';
+import Category from '../../../models/Category'
 
 const CategoryManagement = () => {
     const categoryDataLoader = useLoaderData();
-
 
     const columns = [
         {
@@ -24,19 +24,20 @@ const CategoryManagement = () => {
                 <>
                     <NavLink to={`/admin/category/edit/${row.id}`}  style={{ color: "blue", marginRight: "10px", fontWeight: "600" }}>Edit</NavLink>
                     <button
-                        onClick={() => {
-                            Swal.fire({
-                                title: 'Peringatan!',
-                                text: 'Apakah anda ingin menghapus data ?',
-                                icon: 'warning',
-                                confirmButtonText: 'Yes',
-                                showCancelButton: true
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    Swal.fire("OK!");
-                                }
-                            });
-                        }}
+                       onClick={() => { 
+                        Swal.fire({
+                            title: 'Peringatan!',
+                            text: 'Apakah anda ingin menghapus data ?',
+                            icon: 'warning',
+                            confirmButtonText: 'Yes',
+                            showCancelButton: true
+                        }).then(async (result) => { 
+                            if (result.isConfirmed) {
+                                console.log('kkkk');
+                                await Category.deleteCategory(row.id);
+                            }
+                        });
+                    }}
                         style={{ color: "red", fontWeight: "600" }}>Delete</button>
                 </>
             )

@@ -104,9 +104,9 @@ const addCategory = async (data) => {
 };
 
 const editCategory = async (data) => {
-  console.log(data);
+
   const response = await RequestUtility.sendRequest({
-    method: "put",
+    method: "PUT",
     url: SERVER_ENDPOINT + "/admin/category",
     data,
     type: "form",
@@ -118,8 +118,35 @@ const editCategory = async (data) => {
       success: true,
       code: response.status,
       data: response.data.data,
-      message: "Kategori berhasil di tambahkan",
+      message: "Kategori berhasil update",
     });
+  } else {
+    result = RequestUtility.standardResponse({
+      success: false,
+      code: response.status,
+      data: null,
+      message: response.data.message,
+    });
+  }
+  return result;
+};
+
+const deleteCategory = async (id) => {
+
+  const response = await RequestUtility.sendRequest({
+    method: "DELETE",
+    url: SERVER_ENDPOINT + "/admin/category/" + id,
+  });
+
+  let result = {};
+  if (response.status === 200 || response.status === 201) {
+    result = RequestUtility.standardResponse({
+      success: true,
+      code: response.status,
+      data: null,
+      message: "Kategori berhasil di hapus",
+    });
+    window.location.reload()
   } else {
     result = RequestUtility.standardResponse({
       success: false,
@@ -135,7 +162,8 @@ const Category = {
   getListTable,
   addCategory,
   getDetailCategory,
-  editCategory
+  editCategory,
+  deleteCategory
 };
 
 export default Category;

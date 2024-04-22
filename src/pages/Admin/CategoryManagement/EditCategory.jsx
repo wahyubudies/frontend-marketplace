@@ -7,17 +7,17 @@ import {useState,useEffect} from 'react'
 const EditCategory = () => {
     const navigate = useNavigate()
     const {id} = useParams()
-    const [removeFile,setRemoveFile] = useState(false);
 
     const [detail,setDetail] = useState({
         id: id,
         name: '',
-        icon: null
+        iconCategory: null
     });
+
     const [form,setForm] = useState({
         id: id,
         name: '',
-        icon: null
+        iconCategory: null
     })
    
    useEffect(()=>{
@@ -25,7 +25,7 @@ const EditCategory = () => {
     setForm({
         id: id,
         name: detail.name,
-        icon: ''
+        iconCategory: null
     })
    },[detail.name])
    
@@ -50,19 +50,18 @@ const EditCategory = () => {
                     <label htmlFor="iconCategory" className='inline-block laeding-tight font-semibold text-slate-500'>
                     Gambar Category
                     </label>
-                    {detail !== null && !removeFile ?
-                        <div className="flex justify-center items-center">
-                         <img src={detail.icon || ''} alt={detail.name || ''} />
-                        <img  className="cursor-pointer" src="https://cdn-icons-png.flaticon.com/512/9790/9790368.png" onClick={() => setRemoveFile(true)} alt="delete" width="20px" />
-                        </div>
-                    :
-                    <input
+ 
+                        <input
                     id="iconCategory"
                     name="iconCategory"
                     onChange={(e) => Action.onChangeFile({ e, form, setForm })}
                     type="file"
-                    className='w-full bg-[#f1f1f1] px-4 py-1.5 rounded mt-2' />    
-                }
+                    className='w-full bg-[#f1f1f1] px-4 py-1.5 rounded mt-2' /> 
+                    {/* {detail !== null && !removeFile ?
+                      
+                    :
+                       
+                } */}
                 </div>
             </div>
             <div className="flex items-center mt-6">

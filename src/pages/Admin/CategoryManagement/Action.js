@@ -50,12 +50,20 @@ const onSubmit = async ({ e, form, navigate }) => {
 
 const onUpdate = async ({ e, form, navigate }) => {
     e.preventDefault();
+    if (!form.name || !form.iconCategory) {
+        return toast.error("Nama kategori dan icon kategori harus diisi!");
+    }
+
+    if (!(form.iconCategory instanceof File)) {
+        return toast.error("Icon kategori harus berupa file yang valid!");
+    }
     try {
 
         const formData = new FormData();
         formData.append("id", form.id)
         formData.append('name', form.name);
-        formData.append("iconCategory",form.iconCategory, form.iconCategory.name);
+        formData.append("iconCategory", form.iconCategory !== null ? form.iconCategory : null, form.iconCategory !== null ? form.iconCategory.name : null);
+
         console.log(formData);
         const reply = await Category.editCategory(formData);
 
@@ -86,12 +94,22 @@ const getDetailCategory = async ({ id, setDetail }) => {
     }
 }
 
+const deleteCategory = async (id) => {
+    try {
+        const data = await Category.deleteCategory(id);
+        return data;
+    } catch (error) {
+      return error
+    }
+}
+
 const Action = {
     onChangeField,
     onChangeFile,
     onSubmit,
     getDetailCategory,
-    onUpdate
+    onUpdate,
+    deleteCategory
 };
 
 export default Action;
