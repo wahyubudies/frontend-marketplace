@@ -1,58 +1,61 @@
-import { NavLink, useLoaderData } from 'react-router-dom';
+import { NavLink, useLoaderData, useNavigate } from 'react-router-dom';
 import { Headline } from '../../../components';
 import DataTable from 'react-data-table-component';
 import Router from '../../../route/router';
 import Swal from 'sweetalert2';
 import DetailItem from './components/DetailItem';
+import Action from './Action';
 
-const columns = [
-    {
-        name: 'Gambar',
-        selector: row => row.image,
-        cell: row => <img height="100px" width="100px" alt={row.image} src={row.image} style={{ objectFit: "cover", margin: "10px 0" }} />,
-    },
-    {
-        name: 'Produk',
-        selector: row => row.name,
-    },
-    {
-        name: 'Harga',
-        selector: row => row.price,
-    },
-    {
-        name: 'Stock',
-        selector: row => row.stock,
-    },
-    {
-        name: 'Action',
-        cell: () => (
-            <>
-                <NavLink to="/admin/product/1/gallery" style={{ color: "green", marginRight: "10px", fontWeight: "600" }}>Gallery</NavLink>
-                <NavLink to="/admin/product/edit/1" style={{ color: "blue", marginRight: "10px", fontWeight: "600" }}>Edit</NavLink>
-                <button
-                    onClick={() => {
-                        Swal.fire({
-                            title: 'Peringatan!',
-                            text: 'Apakah anda ingin menghapus data ?',
-                            icon: 'warning',
-                            confirmButtonText: 'Yes',
-                            showCancelButton: true
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                Swal.fire("OK!");
-                            }
-                        });
-                    }}
-                    style={{ color: "red", fontWeight: "600" }}>Delete</button>
-            </>
-        )
-    },
-];
+
 
 const ProductManagement = () => {
-
     const productDataLoader = useLoaderData();
-    console.log("🚀 ~ ProductManagement ~ productDataLoader:", productDataLoader);
+    const navigate = useNavigate();
+
+    const columns = [
+        {
+            name: 'Gambar',
+            selector: row => row.image,
+            cell: row => <img height="100px" width="100px" alt={row.image} src={row.image} style={{ objectFit: "cover", margin: "10px 0" }} />,
+        },
+        {
+            name: 'Produk',
+            selector: row => row.name,
+        },
+        {
+            name: 'Harga',
+            selector: row => row.price,
+        },
+        {
+            name: 'Stock',
+            selector: row => row.stock,
+        },
+        {
+            name: 'Action',
+            cell: (row) => (
+                <>
+                    <NavLink to={`/admin/product/${row.id}/gallery`} style={{ color: "green", marginRight: "10px", fontWeight: "600" }}>Gallery</NavLink>
+                    <NavLink to={`/admin/product/edit/${row.id}`} style={{ color: "blue", marginRight: "10px", fontWeight: "600" }}>Edit</NavLink>
+                    <button
+                        onClick={() => {
+                            Swal.fire({
+                                title: 'Peringatan!',
+                                text: 'Apakah anda ingin menghapus data ?',
+                                icon: 'warning',
+                                confirmButtonText: 'Yes',
+                                showCancelButton: true
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    const idProduct = row.id;
+                                    Action.onDeleteById(idProduct, navigate);
+                                }
+                            });
+                        }}
+                        style={{ color: "red", fontWeight: "600" }}>Delete</button>
+                </>
+            )
+        },
+    ];
 
     return (
         <>

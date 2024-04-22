@@ -1,26 +1,13 @@
 import React from 'react';
 import DataTable from 'react-data-table-component';
 import { Headline } from '../../../components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLoaderData, useNavigate } from 'react-router-dom';
 import Router from '../../../route/router';
 import Swal from 'sweetalert2';
-
-const data = [
-    {
-        id: 1,
-        image: "https://i.ytimg.com/vi/uRXmA10PYM0/maxresdefault.jpg"
-    },
-    {
-        id: 2,
-        image: "https://i.ytimg.com/vi/uRXmA10PYM0/maxresdefault.jpg"
-    },
-    {
-        id: 3,
-        image: "https://i.ytimg.com/vi/uRXmA10PYM0/maxresdefault.jpg"
-    }
-];
+import Action from './Action';
 
 const GalleryProduct = () => {
+    const navigate = useNavigate();
     const columns = [
         {
             name: 'Image',
@@ -29,7 +16,7 @@ const GalleryProduct = () => {
         },
         {
             name: 'Action',
-            cell: () => (
+            cell: (row) => (
                 <button
                     onClick={() => {
                         Swal.fire({
@@ -40,7 +27,7 @@ const GalleryProduct = () => {
                             showCancelButton: true
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                Swal.fire("OK!");
+                                Action.onDeleteItemGallery(row.id, navigate);
                             }
                         });
                     }}
@@ -48,6 +35,8 @@ const GalleryProduct = () => {
             )
         },
     ];
+
+    const data = useLoaderData();
 
     return (
         <div className="bg-white p-8 rounded-2xl w-full max-w-[1024px]">

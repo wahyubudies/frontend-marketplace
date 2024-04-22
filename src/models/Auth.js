@@ -6,7 +6,8 @@ const register = async (data) => {
         method: 'post',
         url: SERVER_ENDPOINT + "/auth/signup",
         data,
-        type: "json"
+        type: "json",
+        useToken: false
     });
 
     let result = {};
@@ -33,7 +34,8 @@ const login = async (data) => {
         method: 'post',
         url: SERVER_ENDPOINT + "/auth/signin",
         data,
-        type: "json"
+        type: "json",
+        useToken: false
     });
 
     let result = {};

@@ -39,7 +39,7 @@ const Sidebar = () => {
                             </NavLink>
                         </li>
                     ) : ""}
-                    {user.role === "admin" || user.role === "merchant" ? (
+                    {user.role === "merchant" ? (
                         <li>
                             <NavLink to={Router.admin.product.home} className="inline-block hover:bg-white hover:text-green-bonek-1 rounded w-full px-3 py-2 text-white font-semibold">
                                 Product

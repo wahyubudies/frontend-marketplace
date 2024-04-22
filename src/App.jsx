@@ -24,7 +24,7 @@ import {
   WistList
 } from "./pages";
 import { ToastContainer } from "react-toastify";
-import { adminProductLoader } from "./loader";
+import { adminCategoryDropdownLoader, adminProductDetailLoader, adminProductGalleryLoader, adminProductLoader } from "./loader";
 
 const router = createBrowserRouter([
   {
@@ -80,15 +80,18 @@ const router = createBrowserRouter([
       },
       {
         path: Router.admin.product.add,
-        element: <AddProduct />
+        element: <AddProduct />,
+        loader: adminCategoryDropdownLoader
       },
       {
         path: Router.admin.product.edit,
-        element: <EditProduct />
+        element: <EditProduct />,
+        loader: ({ params }) => adminProductDetailLoader(params.id)
       },
       {
         path: Router.admin.product.gallery,
-        element: <GalleryProduct />
+        element: <GalleryProduct />,
+        loader: ({ params }) => adminProductGalleryLoader(params.id)
       },
     ]
   },
