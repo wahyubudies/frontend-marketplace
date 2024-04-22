@@ -4,7 +4,8 @@ import Router from '../../../route/router';
 import Swal from 'sweetalert2';
 import { store } from "../../../store";
 import { logoutUser } from '../../../features/auth/authSlice';
-import { GeneralUtility } from "../../../utils/general";
+import { GeneralUtility } from '../../../utils';
+
 
 const Sidebar = () => {
     const LOGO = "/img/logo.webp";

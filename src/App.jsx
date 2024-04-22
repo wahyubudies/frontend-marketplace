@@ -24,6 +24,7 @@ import {
   WistList
 } from "./pages";
 import { ToastContainer } from "react-toastify";
+import { adminProductLoader } from "./loader";
 
 const router = createBrowserRouter([
   {
@@ -74,7 +75,8 @@ const router = createBrowserRouter([
       },
       {
         path: Router.admin.product.home,
-        element: <ProductManagement />
+        element: <ProductManagement />,
+        loader: adminProductLoader
       },
       {
         path: Router.admin.product.add,

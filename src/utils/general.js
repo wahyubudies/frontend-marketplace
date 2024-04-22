@@ -9,4 +9,4 @@ const GeneralUtility = {
     getUserInfo
 };
 
-export { GeneralUtility };
+export default GeneralUtility;

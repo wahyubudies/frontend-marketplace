@@ -1,9 +1,9 @@
 import { toast } from "react-toastify";
-import Auth from "../../models/Auth";
 import Router from "../../route/router";
 import { store } from "../../store";
 import { loginUser } from "../../features/auth/authSlice";
 import Cookies from "js-cookie";
+import { Auth } from "../../models";
 
 const onChangeField = ({ e, form, setForm }) => {
     const value = e.target.value;

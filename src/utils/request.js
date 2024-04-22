@@ -27,12 +27,13 @@ const standardResponse = ({
     };
 };
 
-const sendRequest = ({ method, url, data, type }) => {
+const sendRequest = ({ method, url, data, type, params }) => {
     return new Promise((resolve, reject) => {
         axios({
             method,
             url,
             data,
+            params,
             headers: {
                 'Content-Type': getTypeRequest(type)
             }
@@ -56,4 +57,4 @@ const RequestUtility = {
     standardResponse
 };
 
-export { RequestUtility };
+export default RequestUtility;

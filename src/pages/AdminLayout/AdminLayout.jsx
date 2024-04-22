@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "./components";
 import { useEffect } from "react";
-import { GeneralUtility } from "../../utils/general";
+
 import { store } from "../../store";
 import { logoutUser } from "../../features/auth/authSlice";
+import { GeneralUtility } from "../../utils";
 
 const AdminLayout = () => {
     useEffect(() => {

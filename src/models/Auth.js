@@ -1,11 +1,10 @@
-import { RequestUtility } from "../utils/request";
-
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+import { RequestUtility } from "../utils";
+const SERVER_ENDPOINT = import.meta.env.VITE_SERVER_ENDPOINT;
 
 const register = async (data) => {
-    const { response } = await RequestUtility.sendRequest({
+    const response = await RequestUtility.sendRequest({
         method: 'post',
-        url: SERVER_URL + "/auth/signup",
+        url: SERVER_ENDPOINT + "/auth/signup",
         data,
         type: "json"
     });
@@ -32,7 +31,7 @@ const register = async (data) => {
 const login = async (data) => {
     const response = await RequestUtility.sendRequest({
         method: 'post',
-        url: SERVER_URL + "/auth/signin",
+        url: SERVER_ENDPOINT + "/auth/signin",
         data,
         type: "json"
     });
