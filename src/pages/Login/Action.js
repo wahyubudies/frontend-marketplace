@@ -1,6 +1,9 @@
 import { toast } from "react-toastify";
 import Auth from "../../models/Auth";
 import Router from "../../route/router";
+import { store } from "../../store";
+import { loginUser } from "../../features/auth/authSlice";
+import Cookies from "js-cookie";
 
 const onChangeField = ({ e, form, setForm }) => {
     const value = e.target.value;
@@ -14,16 +17,21 @@ const onChangeField = ({ e, form, setForm }) => {
 const onSubmit = async ({ e, form, navigate }) => {
     e.preventDefault();
 
-    const reply = await Auth.register({
-        fullname: form.fullName,
+    const reply = await Auth.login({
         email: form.email,
         password: form.password,
     });
 
-    if (reply.success) {
-        navigate(Router.login);
-        toast.success(reply.message);
+    if (!reply.success) {
+        return toast.error(reply.message);
     }
+
+    const userInfo = JSON.stringify(reply.data);
+    Cookies.set('userInfo', userInfo);
+
+    store.dispatch(loginUser());
+    navigate(Router.home);
+    toast.success("Login berhasil");
 };
 
 const Action = {

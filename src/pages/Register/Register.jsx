@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Router from '../../route/router';
 import Action from './Action';
 
 const Register = () => {
     const [form, setForm] = useState({});
+    const navigate = useNavigate();
 
     return (
         <div className='w-full h-[100dvh] bg-gradient-to-r from-green-bonek-1 to-green-bonek-2 items-center justify-center flex'>
-            <form onSubmit={(e) => Action.onSubmit(e, form)} className="p-6 bg-gray-bonek rounded-3xl max-w-[500px] w-3/4">
+            <form onSubmit={(e) => Action.onSubmit({ e, form, navigate })} className="p-6 bg-gray-bonek rounded-3xl max-w-[500px] w-3/4">
                 <h3 className='text-center text-green-bonek-1 mb-2 font-bold text-2xl'>Daftar Akun</h3>
                 <div className='mb-2'>
                     <label
                         htmlFor='fullName'
                         className='block text-gray-700 mb-2'>Nama Lengkap</label>
                     <input
-                        onChange={(e) => Action.onChangeField(e, form, setForm)}
+                        onChange={(e) => Action.onChangeField({ e, form, setForm })}
                         name='fullName'
                         type='text'
                         placeholder='Nama Legkap'
@@ -26,7 +27,7 @@ const Register = () => {
                         htmlFor='phoneNumber'
                         className='block text-gray-700 mb-2'>No. Telp Whatsapp</label>
                     <input
-                        onChange={(e) => Action.onChangeField(e, form, setForm)}
+                        onChange={(e) => Action.onChangeField({ e, form, setForm })}
                         name='phoneNumber'
                         type='text'
                         placeholder='No. Telp Whatsapp'
@@ -37,7 +38,7 @@ const Register = () => {
                         htmlFor='address'
                         className='block text-gray-700 mb-2'>Alamat Lengkap</label>
                     <textarea
-                        onChange={(e) => Action.onChangeField(e, form, setForm)}
+                        onChange={(e) => Action.onChangeField({ e, form, setForm })}
                         name='address'
                         type='text'
                         placeholder='Alamat Lengkap'
@@ -49,7 +50,7 @@ const Register = () => {
                         htmlFor='email'
                         className='block text-gray-700 mb-2'>Email Aktif</label>
                     <input
-                        onChange={(e) => Action.onChangeField(e, form, setForm)}
+                        onChange={(e) => Action.onChangeField({ e, form, setForm })}
                         name='email'
                         type='email'
                         placeholder='Email Aktif'
@@ -60,7 +61,7 @@ const Register = () => {
                         htmlFor='password'
                         className='block text-gray-700 mb-2' >Password</label>
                     <input
-                        onChange={(e) => Action.onChangeField(e, form, setForm)}
+                        onChange={(e) => Action.onChangeField({ e, form, setForm })}
                         name='password'
                         type='password'
                         placeholder='Password'

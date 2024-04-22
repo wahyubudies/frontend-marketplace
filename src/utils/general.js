@@ -1,5 +1,12 @@
-const GeneralUtility = {
+import Cookies from "js-cookie";
 
+const getUserInfo = () => {
+    const userInfo = Cookies.get("userInfo");
+    return userInfo ? JSON.parse(userInfo) : null;
 };
 
-export default GeneralUtility;
+const GeneralUtility = {
+    getUserInfo
+};
+
+export { GeneralUtility };

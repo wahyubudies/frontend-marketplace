@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Container from './Container';
 import { NavLink } from 'react-router-dom';
 import Router from "../route/router";
+import { useSelector } from 'react-redux';
 
 const Header = () => {
     const LOGO = "/img/logo.webp";
@@ -11,6 +12,8 @@ const Header = () => {
     const OPEN_BARS = "/img/open-bars.png";
     const CLOSE_BARS = "/img/close-bars.png";
     const [openMenu, setOpenMenu] = useState(false);
+    const { isLoggedIn } = useSelector(state => state.auth);
+
     return (
         <div className='w-full bg-gradient-to-r from-green-bonek-1 to-green-bonek-2 py-4'>
             <Container className="hidden lg:flex items-center justify-between">
@@ -45,10 +48,16 @@ const Header = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to={Router.login} className='bg-blue-bonek hover:bg-black text-white font-bold py-2 px-4 rounded-2xl flex items-center'>
-                            <img src={USER_ICON} alt='' className='w-5 h-6 object-contain mr-2' />
-                            Masuk
-                        </NavLink>
+                        {isLoggedIn ? (
+                            <button onClick={() => window.location.href = Router.admin.home}
+                                className={`bg-slate-500 hover:bg-black text-white font-bold py-2 px-4 rounded-2xl flex items-center`}>
+                                <img src={USER_ICON} alt='' className='w-5 h-6 object-contain mr-2' /> Profile
+                            </button>
+                        ) : (
+                            <NavLink to={Router.login} className={`bg-blue-bonek hover:bg-black text-white font-bold py-2 px-4 rounded-2xl flex items-center`}>
+                                <img src={USER_ICON} alt='' className='w-5 h-6 object-contain mr-2' /> Masuk
+                            </NavLink>
+                        )}
                     </li>
                 </ul>
             </Container>
@@ -115,7 +124,7 @@ const Header = () => {
                     </div>
                 ) : ""}
             </Container>
-        </div>
+        </div >
     );
 };
 

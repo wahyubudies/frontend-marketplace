@@ -23,6 +23,7 @@ import {
   Register,
   WistList
 } from "./pages";
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
   {
@@ -105,7 +106,20 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <RouterProvider router={router} />
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+      />
+    </>
   );
 };
 

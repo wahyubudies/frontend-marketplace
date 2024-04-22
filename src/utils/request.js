@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const findType = (type) => {
+const getTypeRequest = (type) => {
     switch (type) {
         case "urlencoded":
             return "application/x-www-form-urlencoded";
@@ -13,6 +13,20 @@ const findType = (type) => {
     }
 };
 
+const standardResponse = ({
+    success = "",
+    code = "",
+    data = null,
+    message = "",
+}) => {
+    return {
+        success,
+        code,
+        data,
+        message,
+    };
+};
+
 const sendRequest = ({ method, url, data, type }) => {
     return new Promise((resolve, reject) => {
         axios({
@@ -20,20 +34,26 @@ const sendRequest = ({ method, url, data, type }) => {
             url,
             data,
             headers: {
-                'Content-Type': findType(type)
+                'Content-Type': getTypeRequest(type)
             }
         })
             .then(response => {
-                resolve(response.data);
+                resolve(response);
             })
             .catch(error => {
-                reject(error);
+                resolve({
+                    data: error.response.data,
+                    status: error.response.status,
+                    statusText: error.response.statusText,
+                    headers: error.response.headers
+                });
             });
     });
 };
 
 const RequestUtility = {
-    sendRequest
+    sendRequest,
+    standardResponse
 };
 
-export default RequestUtility;
+export { RequestUtility };

@@ -1,7 +1,18 @@
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "./components";
+import { useEffect } from "react";
+import { GeneralUtility } from "../../utils/general";
+import { store } from "../../store";
+import { logoutUser } from "../../features/auth/authSlice";
 
 const AdminLayout = () => {
+    useEffect(() => {
+        const userInfo = GeneralUtility.getUserInfo();
+        if (!userInfo) {
+            return store.dispatch(logoutUser());
+        }
+    }, []);
+
     return (
         <div className="flex items-stretch">
             <Sidebar />
