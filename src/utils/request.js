@@ -1,6 +1,5 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import Cookies from "js-cookie";
 
 const getTypeRequest = (type) => {
     switch (type) {
@@ -44,20 +43,19 @@ const sendRequest = async ({ method, url, data, type, params, useToken = true })
             method,
             url,
             data,
-            params,           
-        })
-            .then(response => {
-                resolve(response);
-            })
-            .catch(error => {
-                resolve({
-                    data: error.response.data,
-                    status: error.response.status,
-                    statusText: error.response.statusText,
-                    headers: error.response.headers
-                });
-            });
-    });
+            params,
+            headers
+        });
+
+        return response;
+    } catch (error) {
+        return {
+            data: error.response.data,
+            status: error.response.status,
+            statusText: error.response.statusText,
+            headers: error.response.headers
+        };
+    }
 };
 
 const RequestUtility = {
