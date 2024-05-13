@@ -8,26 +8,14 @@ const MENU = [
     },
     {
         to: "#",
-        name: "Promo"
-    },
-    {
-        to: "#",
-        name: "Baru"
-    },
-    {
-        to: "#",
-        name: "Kategori"
-    },
-];
-const SOSMED = [
-    {
-        to: "#",
         name: "About Us"
     },
     {
         to: "#",
-        name: "Contact Us"
+        name: "Product"
     },
+];
+const SOSMED = [
     {
         to: "#",
         name: "Instagram"

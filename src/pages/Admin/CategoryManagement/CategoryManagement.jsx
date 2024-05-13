@@ -33,7 +33,6 @@ const CategoryManagement = () => {
                             showCancelButton: true
                         }).then(async (result) => { 
                             if (result.isConfirmed) {
-                                console.log('kkkk');
                                 await Category.deleteCategory(row.id);
                             }
                         });

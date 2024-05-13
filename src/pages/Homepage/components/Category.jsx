@@ -1,7 +1,7 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { Container, Headline } from '../../../components';
 
-const Category = () => {
+const Category = ({ categories }) => {
     return (
         <div className='py-10 bg-green-bonek-2'>
             <Container>
@@ -22,24 +22,11 @@ const Category = () => {
                                 },
                             }
                         }} aria-label="Slider Promo">
-                        <SplideSlide className="p-4">
-                            <img src="/img/uniqlo.png" className='w-full h-full object-cover max-w-[200px] mx-auto' />
-                        </SplideSlide>
-                        <SplideSlide className="p-4">
-                            <img src="/img/uniqlo.png" className='w-full h-full object-cover max-w-[200px] mx-auto' />
-                        </SplideSlide>
-                        <SplideSlide className="p-4">
-                            <img src="/img/uniqlo.png" className='w-full h-full object-cover max-w-[200px] mx-auto' />
-                        </SplideSlide>
-                        <SplideSlide className="p-4">
-                            <img src="/img/uniqlo.png" className='w-full h-full object-cover max-w-[200px] mx-auto' />
-                        </SplideSlide>
-                        <SplideSlide className="p-4">
-                            <img src="/img/uniqlo.png" className='w-full h-full object-cover max-w-[200px] mx-auto' />
-                        </SplideSlide>
-                        <SplideSlide className="p-4">
-                            <img src="/img/uniqlo.png" className='w-full h-full object-cover max-w-[200px] mx-auto' />
-                        </SplideSlide>
+                        {categories.map(({ icon }, index) => (
+                            <SplideSlide className="p-4" key={index}>
+                                <img src={icon} className='w-full h-full object-cover max-w-[200px] mx-auto' />
+                            </SplideSlide>
+                        ))}
                     </Splide>
                 </div>
             </Container>

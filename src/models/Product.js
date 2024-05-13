@@ -195,13 +195,24 @@ const getDetail = async (idProduct) => {
         data: null,
         type: "json"
     });
+    const { images, merchant, ...rest } = response.data.data;
+    const formattedData = {
+        images: images.map(item => SERVER_URL + "/" + item.image),
+        merchant: {
+            id: merchant.id ?? "-",
+            name: merchant.merchant_name ?? "-",
+            phone_number: merchant.phone_number ?? "-",
+            address: merchant.address ?? "-"
+        },
+        ...rest
+    };
 
     let result = {};
     if (response.status === 200 || response.status === 201) {
         result = RequestUtility.standardResponse({
             success: true,
             code: response.status,
-            data: response.data.data,
+            data: formattedData,
             message: "Sukses menampilkan produk!",
         });
     } else {
@@ -250,7 +261,45 @@ const getGalleryItem = async (idProduct) => {
     return result;
 };
 
+const getProductList = async (params) => {
+    const response = await RequestUtility.sendRequest({
+        method: 'get',
+        url: SERVER_ENDPOINT + "/merchant/products",
+        params,
+        useToken: false
+    });
+
+    const formattedData = response.data.data.products.map(item => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        photo: SERVER_URL + "/" + item.photo
+    }));
+
+    let result = {};
+    if (response.status === 200 || response.status === 201) {
+        result = RequestUtility.standardResponse({
+            success: true,
+            code: response.status,
+            data: {
+                products: formattedData,
+                page: response.data.data.page
+            },
+            message: "Sukses menampilkan products!",
+        });
+    } else {
+        result = RequestUtility.standardResponse({
+            success: false,
+            code: response.status,
+            data: null,
+            message: response.data.message,
+        });
+    }
+    return result;
+};
+
 const Product = {
+    getProductList,
     getListTable,
     getListCategory,
     addProductItem,

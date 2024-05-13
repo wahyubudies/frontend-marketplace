@@ -1,11 +1,19 @@
+import { useLoaderData } from 'react-router-dom';
 import { CardProduct, Headline, ScrollTopButton } from '../../components';
 import { CategoryFilter, TypeFilter } from './components';
 import { useState } from 'react';
+import Action from './Action';
 
 const Catalog = () => {
     const [showSidebar, setShowSidebar] = useState(true);
     const OPEN_BARS = "/img/open-bars.png";
     const CLOSE_BARS = "/img/close-bars.png";
+
+    const { categories, products } = useLoaderData();
+    const [items, setItems] = useState(products.products);
+    const [page, setPage] = useState(0);
+    const [total, setTotal] = useState(products.products.length);
+
     return (
         <>
             <div className='flex'>
@@ -29,24 +37,34 @@ const Catalog = () => {
                             <TypeFilter />
                         </div>
                         <div className='py-4'>
-                            <CategoryFilter />
+                            <CategoryFilter categories={categories} />
                         </div>
                     </div>
                 )}
                 <div className='flex-grow h-screen bg-white p-6 overflow-auto'>
                     <Headline type="blue" title="Semua Kategori" />
                     <div className='grid grid-cols-2 lg:grid-cols-4 gap-8 py-8'>
-                        <CardProduct type="green" />
-                        <CardProduct type="green" />
-                        <CardProduct type="green" />
-                        <CardProduct type="green" />
-                        <CardProduct type="green" />
-                        <CardProduct type="green" />
-                        <CardProduct type="green" />
+                        {items.map((item, index) => (
+                            <CardProduct type="green" key={index} item={item} />
+                        ))}
                     </div>
-                    <button className='bg-blue-bonek hover:bg-black text-white font-bold py-2 px-4 rounded-2xl mx-auto block'>
-                        Lihat Lebih Banyak
-                    </button>
+
+                    {total > page && (
+                        <button
+                            onClick={() => {
+                                Action.loadMoreProducts({
+                                    items,
+                                    total,
+                                    page,
+                                    setItems,
+                                    setTotal,
+                                    setPage
+                                });
+                            }}
+                            className='bg-blue-bonek hover:bg-black text-white font-bold py-2 px-4 rounded-2xl mx-auto block'>
+                            Lihat Lebih Banyak
+                        </button>
+                    )}
                 </div>
             </div>
             <ScrollTopButton />

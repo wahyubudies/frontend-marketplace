@@ -29,7 +29,10 @@ import {
   adminProductDetailLoader,
   adminProductGalleryLoader,
   adminProductLoader,
-  adminCategoryLoader
+  adminCategoryLoader,
+  homepageLoader,
+  catalogLoader,
+  detailProductLoader
 } from "./loader";
 
 const router = createBrowserRouter([
@@ -39,15 +42,18 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Homepage />
+        element: <Homepage />,
+        loader: homepageLoader
       },
       {
         path: Router.catalog,
-        element: <Catalog />
+        element: <Catalog />,
+        loader: catalogLoader
       },
       {
         path: Router["detail-product"],
-        element: <DetailProduct />
+        element: <DetailProduct />,
+        loader: ({ params }) => detailProductLoader(params.id)
       },
       {
         path: Router.cart,

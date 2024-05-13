@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CategoryFilter = () => {
+const CategoryFilter = ({ categories }) => {
     return (
         <div className='gap-2 grid h-full'>
             <div>
@@ -8,11 +8,14 @@ const CategoryFilter = () => {
                     Semua Kategori
                 </p>
             </div>
-            <div className='hover:bg-white text-white   hover:text-green-bonek-1 py-2 px-4 rounded-lg cursor-pointer'>
-                <p className='font-medium tracking-wider'>
-                    Fashion
-                </p>
-            </div>
+            {categories.map(({ name }, index) => (
+                <div className='hover:bg-white text-white   hover:text-green-bonek-1 py-2 px-4 rounded-lg cursor-pointer' key={index}>
+                    <p className='font-medium tracking-wider'>
+                        {name}
+                    </p>
+                </div>
+            ))}
+
         </div>
     );
 };

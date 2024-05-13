@@ -64,7 +64,6 @@ const onUpdate = async ({ e, form, navigate }) => {
         formData.append('name', form.name);
         formData.append("iconCategory", form.iconCategory !== null ? form.iconCategory : null, form.iconCategory !== null ? form.iconCategory.name : null);
 
-        console.log(formData);
         const reply = await Category.editCategory(formData);
 
         if (!reply.success) {

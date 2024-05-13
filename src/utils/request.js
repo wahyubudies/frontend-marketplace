@@ -30,7 +30,8 @@ const standardResponse = ({
 
 const sendRequest = async ({ method, url, data, type, params, useToken = true }) => {
     try {
-        const token = useToken ? JSON.parse(Cookies.get("userInfo")).token : null;
+        const getCookieToken = Cookies.get("userInfo") || false;
+        const token = useToken && getCookieToken ? JSON.parse(getCookieToken).token : null;
         const headers = {
             'Content-Type': getTypeRequest(type)
         };

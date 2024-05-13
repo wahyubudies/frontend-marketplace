@@ -1,42 +1,43 @@
 import { Container, QtyButton } from '../../../components';
 import { ThumbnailItem } from "./index";
 
-const ProductItem = () => {
+const ProductItem = ({ item }) => {
+    const { name, stock, price, merchant, description, weight, images } = item;
     return (
         <div className='py-10 bg-white'>
             <Container className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                 <div>
-                    <ThumbnailItem />
+                    <ThumbnailItem images={images} />
                 </div>
                 <div className='grid gap-4'>
                     <div className="flex w-full justify-between items-center">
                         <h1 className='font-bold text-green-bonek-1 text-3xl leading-tight'>
-                            White T-Shirt
+                            {name}
                         </h1>
                         <p className='text-slate-700 font-bold'>
-                            Stock : 56
+                            Stock : {stock}
                         </p>
                     </div>
                     <div className="flex w-full justify-between items-center">
                         <h1 className='font-bold text-blue-bonek text-3xl leading-tight'>
-                            Rp100,000
+                            Rp{price}
                         </h1>
                         <p className='text-slate-700 font-bold'>
-                            Berat Produk : 1000 gram
+                            Berat Produk : {weight} gram
                         </p>
                     </div>
                     <p className="text-slate-700 text-justify">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis fuga voluptatibus ipsa? Ad, iusto saepe ducimus molestias maiores totam quae labore magnam, repellat suscipit atque hic rem error minima necessitatibus.
+                        {description}
                     </p>
                     <div className="grid gap-1">
                         <p className='text-slate-700 font-bold'>
-                            Toko : xxxx
+                            Toko : {merchant.name}
                         </p>
                         <p className='text-slate-700 font-bold'>
-                            Kontak : 0898989898
+                            Kontak : {merchant.phone_number}
                         </p>
                         <p className='text-slate-700 font-bold'>
-                            Alamat : Jl. Gubeng 200 Surabaya
+                            Alamat : {merchant.address}
                         </p>
                     </div>
                     <div className='flex items-stretch'>

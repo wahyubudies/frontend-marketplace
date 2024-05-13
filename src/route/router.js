@@ -3,7 +3,7 @@ const Router = {
     "login": "/login",
     "register": "/register",
     "catalog": "/catalog",
-    "detail-product": "/detail-product/:slug",
+    "detail-product": "/detail-product/:id",
     "cart": "/cart",
     "wistlist": "/wistlist",
     "admin": {
