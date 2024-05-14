@@ -28,14 +28,18 @@ const Header = () => {
                         <NavLink to={Router.catalog} className="text-white font-bold leading-tight text-md hover:text-slate-200">Produk</NavLink>
                     </li>
                     <li>
-                        <div className="relative">
+                        <form onSubmit={(e) => {
+                            e.preventDefault();
+                            const productName = e.currentTarget.search.value;
+                            window.location.href = `/catalog?productName=${productName}&type=&category=`
+                        }} className="relative">
                             <input
                                 className='border-0 outline-0 rounded-2xl py-2 pl-4 pr-9'
                                 type="text"
                                 name="search"
                                 placeholder="Cari produk ..." id="" />
                             <img src="/img/green-search.webp" className='w-4 h-4 object-contain absolute top-3 right-3 z-10' />
-                        </div>
+                        </form>
                     </li>
                     <li>
                         <NavLink to={Router.cart} className='hover:scale-105'>

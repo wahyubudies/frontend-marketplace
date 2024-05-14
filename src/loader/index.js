@@ -6,3 +6,4 @@ export { default as adminProductGalleryLoader } from "./admin/productGallery";
 export { default as homepageLoader } from "./home";
 export { default as catalogLoader } from "./catalog";
 export { default as detailProductLoader } from "./detail-product";
+export { default as cartLoader } from "./cart";

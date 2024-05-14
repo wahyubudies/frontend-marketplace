@@ -4,20 +4,35 @@ const getCategories = async () => {
     return await Category.getListTable();
 };
 
-const getProducts = async () => {
+const getProducts = async ({
+    productName,
+    type,
+    category
+}) => {
     return await Product.getProductList({
         offset: 0,
-        limit: 8
+        limit: 8,
+        type,
+        category,
+        search: productName
     });
 };
 
-const catalogLoader = async () => {
+const catalogLoader = async ({
+    productName,
+    type,
+    category
+}) => {
     const [
         categories,
         products
     ] = await Promise.all([
         getCategories(),
-        getProducts()
+        getProducts({
+            productName,
+            type,
+            category
+        })
     ]);
 
     return {

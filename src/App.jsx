@@ -21,6 +21,7 @@ import {
   NotFound,
   ProductManagement,
   Register,
+  SuccessCheckout,
   WistList
 } from "./pages";
 import { ToastContainer } from "react-toastify";
@@ -32,7 +33,8 @@ import {
   adminCategoryLoader,
   homepageLoader,
   catalogLoader,
-  detailProductLoader
+  detailProductLoader,
+  cartLoader
 } from "./loader";
 
 const router = createBrowserRouter([
@@ -48,7 +50,17 @@ const router = createBrowserRouter([
       {
         path: Router.catalog,
         element: <Catalog />,
-        loader: catalogLoader
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+
+          const params = {
+            productName: url.searchParams.get("productName") || null,
+            type: url.searchParams.get("type") || null,
+            category: url.searchParams.get("category") || null
+          };
+
+          return catalogLoader(params);
+        }
       },
       {
         path: Router["detail-product"],
@@ -57,7 +69,8 @@ const router = createBrowserRouter([
       },
       {
         path: Router.cart,
-        element: <Cart />
+        element: <Cart />,
+        loader: cartLoader
       },
       {
         path: Router.wistlist,
@@ -115,6 +128,10 @@ const router = createBrowserRouter([
   {
     path: Router.register,
     element: <Register />
+  },
+  {
+    path: Router["success-checkout"],
+    element: <SuccessCheckout />
   },
   {
     path: '*',

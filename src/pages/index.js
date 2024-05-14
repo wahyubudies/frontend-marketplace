@@ -7,6 +7,7 @@ export { default as DetailProduct } from "./DetailProduct/DetailProduct";
 export { default as WistList } from "./WistList/WistList";
 export { default as Cart } from "./Cart/Cart";
 export { default as NotFound } from "./NotFound/NotFound";
+export { default as SuccessCheckout } from "./SuccessCheckout/SuccessCheckout";
 
 export { default as AdminLayout } from './AdminLayout/AdminLayout';
 export { default as Dashboard } from './Admin/Dashboard/Dashboard';

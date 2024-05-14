@@ -298,6 +298,125 @@ const getProductList = async (params) => {
     return result;
 };
 
+const addToCart = async (data) => {
+    const response = await RequestUtility.sendRequest({
+        method: 'post',
+        url: SERVER_ENDPOINT + "/user/cart",
+        data,
+        type: "json"
+    });
+
+    let result = {};
+    if (response.status === 200 || response.status === 201) {
+        result = RequestUtility.standardResponse({
+            success: true,
+            code: response.status,
+            data: response.data.data,
+            message: "Sukses menampilkan products!",
+        });
+    } else {
+        result = RequestUtility.standardResponse({
+            success: false,
+            code: response.status,
+            data: null,
+            message: response.data.message,
+        });
+    }
+    return result;
+};
+
+const getCart = async (data) => {
+    const response = await RequestUtility.sendRequest({
+        method: 'get',
+        url: SERVER_ENDPOINT + "/user/carts"
+    });
+
+    const formattedData = response.data.data.carts.map(item => ({
+        id: item.id,
+        name: item.product.name,
+        qty: item.qty,
+        photo: item.product.photo ? SERVER_URL + "/" + item.product.photo : "https://ipsf.net/wp-content/uploads/2021/12/dummy-image-square.webp",
+        price: item.product.price
+    }));
+
+    const totalPrice = formattedData.reduce((total, item) => {
+        return total + (item.price * item.qty);
+    }, 0);
+    
+    let result = {};
+    if (response.status === 200 || response.status === 201) {
+        result = RequestUtility.standardResponse({
+            success: true,
+            code: response.status,
+            data: { 
+                items: formattedData, 
+                totalPrice
+            },
+            message: "Sukses menampilkan products!",
+        });
+    } else {
+        result = RequestUtility.standardResponse({
+            success: false,
+            code: response.status,
+            data: null,
+            message: response.data.message,
+        });
+    }
+    return result;
+};
+
+const checkout = async (data) => {
+    const response = await RequestUtility.sendRequest({
+        method: 'post',
+        url: SERVER_ENDPOINT + "/user/checkout",
+        data,
+        type:"json"
+    });
+    
+    let result = {};
+    if (response.status === 200 || response.status === 201) {
+        result = RequestUtility.standardResponse({
+            success: true,
+            code: response.status,
+            data: response.data.data,
+            message: "Sukses menampilkan products!",
+        });
+    } else {
+        result = RequestUtility.standardResponse({
+            success: false,
+            code: response.status,
+            data: null,
+            message: response.data.message,
+        });
+    }
+    return result;
+};
+
+const removeFromCart = async (productId) => {
+    const response = await RequestUtility.sendRequest({
+        method: 'delete',
+        url: SERVER_ENDPOINT + "/user/cart/delete/" + productId,
+    });
+    
+    let result = {};
+    if (response.status === 200 || response.status === 201) {
+        result = RequestUtility.standardResponse({
+            success: true,
+            code: response.status,
+            data: null,
+            message: "Sukses menampilkan products!",
+        });
+    } else {
+        result = RequestUtility.standardResponse({
+            success: false,
+            code: response.status,
+            data: null,
+            message: response.data.message,
+        });
+    }
+    return result;
+};
+
 const Product = {
     getProductList,
     getListTable,
@@ -307,7 +426,11 @@ const Product = {
     getDetail,
     editProductItem,
     getGalleryItem,
-    deleteItemGallery
+    deleteItemGallery,
+    addToCart,
+    getCart,
+    checkout,
+    removeFromCart
 };
 
 export default Product;

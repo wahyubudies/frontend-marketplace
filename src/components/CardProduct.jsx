@@ -1,5 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Product } from '../models';
+import { toast } from 'react-toastify';
 
 const CardProduct = ({ type, item }) => {
 
@@ -8,6 +9,17 @@ const CardProduct = ({ type, item }) => {
     const bgContent = type === "green" ? "bg-green-bonek-1" : "bg-white";
     const textContent = type === "green" ? "text-white" : "text-green-bonek-1";
     const cartIcon = type === "green" ? "/img/white-cart.webp" : "/img/green-cart.webp";
+
+    const onAddToCart = async () => {
+        const reply = await Product.addToCart({
+            productId: item?.id,
+            qty: 1
+        });
+        if (reply.success) {
+            return toast.success("Sukses menambahkan ke keranjang!");
+        }
+        toast.error(reply.message);
+    };
 
     return (
         <div className='w-full'>
@@ -27,7 +39,10 @@ const CardProduct = ({ type, item }) => {
                     </a>
                     <p className={`${textContent} font-light`}>Rp{item?.price}</p>
                 </div>
-                <img src={cartIcon}
+                <img
+                    role="presentation"
+                    onClick={() => onAddToCart()}
+                    src={cartIcon}
                     alt=""
                     className='cursor-pointer hover:scale-105 w-6 h-6' />
             </div>

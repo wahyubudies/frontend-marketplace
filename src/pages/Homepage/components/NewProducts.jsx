@@ -14,7 +14,7 @@ const NewProducts = ({ products }) => {
                 <div className="py-10">
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
                         {items.map((item, index) => (
-                            <CardProduct key={index} type="green" item={item} />
+                            <CardProduct key={index} type="green" item={item}/>
                         ))}
                     </div>
                     {total > page && (

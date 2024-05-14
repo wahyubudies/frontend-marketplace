@@ -6,6 +6,7 @@ const Router = {
     "detail-product": "/detail-product/:id",
     "cart": "/cart",
     "wistlist": "/wistlist",
+    "success-checkout": "/success-checkout",
     "admin": {
         "home": "/admin",
         "category": {
