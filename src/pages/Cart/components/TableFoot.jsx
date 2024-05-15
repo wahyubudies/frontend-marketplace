@@ -30,7 +30,7 @@ const TableFoot = ({ totalPrice, items }) => {
                         }).then(async (result) => {
                             if (result.isConfirmed) {
                                 const idProducts = items.map(item => item.id);
-                                const reply = await Product.checkout(idProducts);
+                                const reply = await Product.checkout({cart: idProducts});
                                 if (!reply.success) {
                                     return toast.error(reply.message);
                                 }

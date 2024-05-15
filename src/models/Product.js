@@ -366,6 +366,7 @@ const getCart = async (data) => {
 };
 
 const checkout = async (data) => {
+    
     const response = await RequestUtility.sendRequest({
         method: 'post',
         url: SERVER_ENDPOINT + "/user/checkout",
