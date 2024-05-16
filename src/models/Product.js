@@ -335,8 +335,9 @@ const getCart = async (data) => {
         id: item.id,
         name: item.product.name,
         qty: item.qty,
-        photo: item.product.photo ? SERVER_URL + "/" + item.product.photo : "https://ipsf.net/wp-content/uploads/2021/12/dummy-image-square.webp",
-        price: item.product.price
+        photo: item.product.imageProduct.length > 0 ? SERVER_URL + "/" + item.product.imageProduct[0].image : "https://ipsf.net/wp-content/uploads/2021/12/dummy-image-square.webp",
+        price: item.product.price,
+
     }));
 
     const totalPrice = formattedData.reduce((total, item) => {

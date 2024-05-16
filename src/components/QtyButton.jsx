@@ -12,6 +12,7 @@ const QtyButton = ({ className, productId }) => {
                 productId: productId,
                 qty: quantity
             });
+            console.log(reply);
             if (reply.success) {
                 setQuantity(newQty);
                 return toast.success("Sukses menambahkan ke keranjang!");

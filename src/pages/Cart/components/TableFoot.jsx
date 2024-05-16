@@ -4,6 +4,7 @@ import { Product } from "../../../models";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Router from '../../../route/router';
+import { GeneralUtility } from '../../../utils';
 const TableFoot = ({ totalPrice, items }) => {
     const navigate = useNavigate();
     return (
@@ -15,7 +16,7 @@ const TableFoot = ({ totalPrice, items }) => {
                             Total Pesanan
                         </p>
                         <p className='text-white font-bold text-lg'>
-                            Rp{totalPrice}
+                            {GeneralUtility.formatRupiah(totalPrice)}
                         </p>
                     </div>
                 </td>

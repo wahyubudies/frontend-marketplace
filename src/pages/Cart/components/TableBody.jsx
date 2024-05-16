@@ -2,8 +2,10 @@ import React from 'react';
 import { QtyButton } from '../../../components';
 import { Product } from '../../../models';
 import { toast } from 'react-toastify';
+import { GeneralUtility } from '../../../utils';
 
 const TableBody = ({ items }) => {
+    console.log(items);
     const TRASH_BUTTON = "/img/button-delete.webp"; return (
 
         <tbody>
@@ -19,7 +21,7 @@ const TableBody = ({ items }) => {
                     </td>
                     <td className='py-2 px-4'>
                         <p className='text-green-bonek-1 font-medium text-end'>
-                            Rp{price}
+                            {GeneralUtility.formatRupiah(price)}
                         </p>
                     </td>
                     <td className='py-2 px-4'>
@@ -27,7 +29,7 @@ const TableBody = ({ items }) => {
                     </td>
                     <td className='py-2 px-4'>
                         <p className='text-green-bonek-1 font-medium text-end'>
-                            Rp{price * qty}
+                            {GeneralUtility.formatRupiah(price * qty)}
                         </p>
                     </td>
                     <td className='py-2 px-4'>

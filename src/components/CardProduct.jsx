@@ -1,6 +1,7 @@
 import React from 'react';
 import { Product } from '../models';
 import { toast } from 'react-toastify';
+import { GeneralUtility } from '../utils';
 
 const CardProduct = ({ type, item }) => {
 
@@ -37,7 +38,7 @@ const CardProduct = ({ type, item }) => {
                         className={`${textContent} font-semibold`}>
                         {item?.name}
                     </a>
-                    <p className={`${textContent} font-light`}>Rp{item?.price}</p>
+                    <p className={`${textContent} font-light`}>{GeneralUtility.formatRupiah(item?.price)}</p>
                 </div>
                 <img
                     role="presentation"

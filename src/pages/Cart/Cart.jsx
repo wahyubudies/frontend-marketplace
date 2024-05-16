@@ -4,6 +4,7 @@ import { TableBody, TableFoot, TableHead } from './components';
 
 const Cart = () => {
     const {items, totalPrice} = useLoaderData();
+    
     return (
         <div className='py-10 bg-white'>
             <Container>

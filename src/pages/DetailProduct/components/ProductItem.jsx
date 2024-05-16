@@ -1,4 +1,5 @@
 import { Container, QtyButton } from '../../../components';
+import { GeneralUtility } from '../../../utils';
 import { ThumbnailItem } from "./index";
 
 const ProductItem = ({ item }) => {
@@ -20,7 +21,7 @@ const ProductItem = ({ item }) => {
                     </div>
                     <div className="flex w-full justify-between items-center">
                         <h1 className='font-bold text-blue-bonek text-3xl leading-tight'>
-                            Rp{price}
+                            {GeneralUtility.formatRupiah(price)}
                         </h1>
                         <p className='text-slate-700 font-bold'>
                             Berat Produk : {weight} gram
