@@ -22,7 +22,8 @@ import {
   ProductManagement,
   Register,
   SuccessCheckout,
-  WistList
+  WistList,
+  OrderPage
 } from "./pages";
 import { ToastContainer } from "react-toastify";
 import {
@@ -34,7 +35,8 @@ import {
   homepageLoader,
   catalogLoader,
   detailProductLoader,
-  cartLoader
+  cartLoader,
+  orderLoader
 } from "./loader";
 
 const router = createBrowserRouter([
@@ -118,6 +120,11 @@ const router = createBrowserRouter([
         path: Router.admin.product.gallery,
         element: <GalleryProduct />,
         loader: ({ params }) => adminProductGalleryLoader(params.id)
+      },
+      {
+        path: Router.admin.orders["list-orders"],
+        element: <OrderPage/>,
+        loader: orderLoader,
       },
     ]
   },

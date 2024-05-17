@@ -20,6 +20,9 @@ const Router = {
             "edit": "/admin/product/edit/:id",
             "gallery": "/admin/product/:id/gallery",
         },
+        "orders":{
+            "list-orders": "/admin/orders",
+        }
     }
 };
 

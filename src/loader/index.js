@@ -7,3 +7,4 @@ export { default as homepageLoader } from "./home";
 export { default as catalogLoader } from "./catalog";
 export { default as detailProductLoader } from "./detail-product";
 export { default as cartLoader } from "./cart";
+export { default as orderLoader } from "./orders";
