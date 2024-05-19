@@ -19,3 +19,4 @@ export { default as ProductManagement } from './Admin/ProductManagement/ProductM
 export { default as AddProduct } from './Admin/ProductManagement/AddProduct';
 export { default as EditProduct } from './Admin/ProductManagement/EditProduct';
 export { default as GalleryProduct } from './Admin/ProductManagement/GalleryProduct';
+export { default as CreateMerchant } from './Admin/CreateMerchant/CreateMerchant';

@@ -57,9 +57,37 @@ const login = async (data) => {
     return result;
 };
 
+const createMerchant = async (data) => {
+    const response = await RequestUtility.sendRequest({
+        method: 'post',
+        url: SERVER_ENDPOINT + "/merchant",
+        data,
+        type: "json"
+    });
+
+    let result = {};
+    if (response.status === 200 || response.status === 201) {
+        result = RequestUtility.standardResponse({
+            success: true,
+            code: response.status,
+            data: null,
+            message: "Berhasil menjadi merchant!",
+        });
+    } else {
+        result = RequestUtility.standardResponse({
+            success: false,
+            code: response.status,
+            data: null,
+            message: response.data.message,
+        });
+    }
+    return result;
+};
+
 const Auth = {
     register,
-    login
+    login,
+    createMerchant
 };
 
 export default Auth;

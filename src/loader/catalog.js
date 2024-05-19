@@ -5,23 +5,24 @@ const getCategories = async () => {
 };
 
 const getProducts = async ({
-    productName,
+    name,
     type,
-    category
+    categoryId
 }) => {
-    return await Product.getProductList({
+    const params = {
         offset: 0,
         limit: 8,
         type,
-        category,
-        search: productName
-    });
+        categoryId,
+        name
+    }
+    return await Product.getProductList(params);
 };
 
 const catalogLoader = async ({
-    productName,
+    name,
     type,
-    category
+    categoryId
 }) => {
     const [
         categories,
@@ -29,9 +30,9 @@ const catalogLoader = async ({
     ] = await Promise.all([
         getCategories(),
         getProducts({
-            productName,
+            name,
             type,
-            category
+            categoryId
         })
     ]);
 

@@ -19,8 +19,9 @@ const getListOrder = async () => {
           code: item.code,
           totalPrice: item.totalPrice,
           status: item.transactionstatus.name,
-          proofPayment: item.proofPayment,
-          productItem: [...item.items]
+          proofPayment: item.proofPayment || "https://ipsf.net/wp-content/uploads/2021/12/dummy-image-square.webp",
+          productItem: [...item.items],
+          cover:"https://ipsf.net/wp-content/uploads/2021/12/dummy-image-square.webp"
         };
       });
   

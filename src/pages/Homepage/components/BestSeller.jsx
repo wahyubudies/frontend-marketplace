@@ -8,16 +8,15 @@ const BestSeller = ({ products }) => {
     const [total, setTotal] = useState(products.length);
 
     const loadMoreProducts = async () => {
-        if (total > page) {
-            const newProducts = await Action.getMoreNewProducts({
-                offset: page + 1,
-                limit: 8,
-            });
+        const newProducts = await Action.getMoreNewProducts({
+            offset: page + 1,
+            limit: 8,
+        });
 
-            setItems([...items, ...newProducts.data.products]);
-            setPage(page + 1);
-            setTotal(newProducts.data.page.totalData);
-        }
+        setItems([...items, ...newProducts.data.products]);
+        setPage(page + 1);
+        setTotal(newProducts.data.page.totalData);
+
     };
 
     return (
@@ -30,7 +29,7 @@ const BestSeller = ({ products }) => {
                             <CardProduct key={index} type="green" item={item} />
                         ))}
                     </div>
-                    {total > page && (
+                    {total >= 8 && page < total && (
                         <button onClick={loadMoreProducts} className="bg-blue-bonek hover:bg-black text-white font-bold py-2 px-4 rounded-2xl mx-auto block">
                             Lihat Lebih Banyak
                         </button>

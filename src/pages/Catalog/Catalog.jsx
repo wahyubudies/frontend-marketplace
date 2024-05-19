@@ -49,7 +49,7 @@ const Catalog = () => {
                         ))}
                     </div>
 
-                    {total > page && (
+                    {total > page && total >= 8 && (
                         <button
                             onClick={() => {
                                 Action.loadMoreProducts({

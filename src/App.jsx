@@ -23,7 +23,8 @@ import {
   Register,
   SuccessCheckout,
   WistList,
-  OrderPage
+  OrderPage,
+  CreateMerchant
 } from "./pages";
 import { ToastContainer } from "react-toastify";
 import {
@@ -38,6 +39,7 @@ import {
   cartLoader,
   orderLoader
 } from "./loader";
+import Cookies from "js-cookie";
 
 const router = createBrowserRouter([
   {
@@ -56,9 +58,9 @@ const router = createBrowserRouter([
           const url = new URL(request.url);
 
           const params = {
-            productName: url.searchParams.get("productName") || null,
-            type: url.searchParams.get("type") || null,
-            category: url.searchParams.get("category") || null
+            name: url.searchParams.get("name") || "",
+            type: url.searchParams.get("type") || "",
+            categoryId: url.searchParams.get("categoryId") || ""
           };
 
           return catalogLoader(params);
@@ -72,7 +74,7 @@ const router = createBrowserRouter([
       {
         path: Router.cart,
         element: <Cart />,
-        loader: cartLoader
+        loader:cartLoader
       },
       {
         path: Router.wistlist,
@@ -123,8 +125,12 @@ const router = createBrowserRouter([
       },
       {
         path: Router.admin.orders["list-orders"],
-        element: <OrderPage/>,
+        element: <OrderPage />,
         loader: orderLoader,
+      },
+      {
+        path: Router.admin["create-merchant"],
+        element: <CreateMerchant />
       },
     ]
   },

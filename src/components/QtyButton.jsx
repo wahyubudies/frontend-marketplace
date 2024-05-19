@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Product } from '../models';
 import { toast } from 'react-toastify';
 
-const QtyButton = ({ className, productId }) => {
-    const [quantity, setQuantity] = useState(1);
+const QtyButton = ({ className, productId, qty }) => {
+    const [quantity, setQuantity] = useState(qty || 1);
 
     const decreaseQuantity = async () => {
         if (quantity > 1) {

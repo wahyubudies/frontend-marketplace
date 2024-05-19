@@ -22,7 +22,8 @@ const Router = {
         },
         "orders":{
             "list-orders": "/admin/orders",
-        }
+        },
+        "create-merchant": "/admin/create-merchant",
     }
 };
 

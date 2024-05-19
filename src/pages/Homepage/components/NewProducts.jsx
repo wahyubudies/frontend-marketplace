@@ -5,7 +5,8 @@ import Action from '../Action';
 const NewProducts = ({ products }) => {
     const [items, setItems] = useState(products);
     const [page, setPage] = useState(0);
-    const [total, setTotal] = useState(products.length);    
+    console.log("🚀 ~ NewProducts ~ page:", page);
+    const [total, setTotal] = useState(products.length);
 
     return (
         <div className="py-10">
@@ -17,7 +18,7 @@ const NewProducts = ({ products }) => {
                             <CardProduct key={index} type="green" item={item}/>
                         ))}
                     </div>
-                    {total > page && (
+                    {total >= 8 && page < total && (
                         <button onClick={() => {
                             Action.loadMoreProducts({
                                 items,

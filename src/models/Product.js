@@ -397,7 +397,10 @@ const checkout = async (data) => {
 const removeFromCart = async (productId) => {
     const response = await RequestUtility.sendRequest({
         method: 'delete',
-        url: SERVER_ENDPOINT + "/user/cart/delete/" + productId,
+        url: SERVER_ENDPOINT + "/user/cart/",
+        data:{
+            cartId:productId
+        }
     });
     
     let result = {};

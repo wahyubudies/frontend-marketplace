@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from './Container';
 import { NavLink } from 'react-router-dom';
 import Router from "../route/router";
@@ -13,6 +13,15 @@ const Header = () => {
     const CLOSE_BARS = "/img/close-bars.png";
     const [openMenu, setOpenMenu] = useState(false);
     const { isLoggedIn } = useSelector(state => state.auth);
+    const [urlProductName, setUrlProductName] = useState("");
+
+
+    useEffect(() => {
+        const urlParams = new URL(window.location.href);
+        const urlProductName = urlParams.searchParams.get('name') || "";
+        setUrlProductName(urlProductName);
+    }, []);
+
 
     return (
         <div className='w-full bg-gradient-to-r from-green-bonek-1 to-green-bonek-2 py-4'>
@@ -25,17 +34,20 @@ const Header = () => {
                         <NavLink to={Router.home} className="text-white font-bold leading-tight text-md hover:text-slate-200">Home</NavLink>
                     </li>
                     <li>
-                        <NavLink to={Router.catalog} className="text-white font-bold leading-tight text-md hover:text-slate-200">Produk</NavLink>
+                        <a href={Router.catalog} className="text-white font-bold leading-tight text-md hover:text-slate-200">Produk</a>
                     </li>
                     <li>
                         <form onSubmit={(e) => {
                             e.preventDefault();
-                            const productName = e.currentTarget.search.value;
-                            window.location.href = `/catalog?productName=${productName}&type=&category=`
+                            const productName = urlProductName || e.currentTarget.search.value;
+
+                            window.location.href = `/catalog?name=${productName}&type=&categoryId=`;
                         }} className="relative">
                             <input
                                 className='border-0 outline-0 rounded-2xl py-2 pl-4 pr-9'
                                 type="text"
+                                value={urlProductName}
+                                onChange={(e) => setUrlProductName(e.target.value)}
                                 name="search"
                                 placeholder="Cari produk ..." id="" />
                             <img src="/img/green-search.webp" className='w-4 h-4 object-contain absolute top-3 right-3 z-10' />

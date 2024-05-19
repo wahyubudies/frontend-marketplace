@@ -5,6 +5,7 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 const OrderPage = () => {
   const ordersResponse = useLoaderData();
+  console.log("🚀 ~ OrderPage ~ ordersResponse:", ordersResponse);
   const is = true;
   
   return (
@@ -23,7 +24,7 @@ const OrderPage = () => {
                 {item.productItem.map((val) => (
                   <div key={val.id}>
                     <img
-                      src={SERVER_URL + "/" + val.product.imageProduct[0].image}
+                      src={item.cover}
                       alt={val.product.name}
                       width="90px"
                     />
@@ -64,7 +65,7 @@ const OrderPage = () => {
                 </div>
               ) : (
                 <img
-                  src={SERVER_URL + "/" + item.proofPayment}
+                  src={item.proofPayment}
                   alt=""
                   className="w-44 h-56"
                 />

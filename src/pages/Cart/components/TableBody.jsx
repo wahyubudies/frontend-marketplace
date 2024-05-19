@@ -3,10 +3,13 @@ import { QtyButton } from '../../../components';
 import { Product } from '../../../models';
 import { toast } from 'react-toastify';
 import { GeneralUtility } from '../../../utils';
+import { useNavigate } from 'react-router-dom';
+import Router from '../../../route/router';
 
 const TableBody = ({ items }) => {
-    console.log(items);
-    const TRASH_BUTTON = "/img/button-delete.webp"; return (
+    const TRASH_BUTTON = "/img/button-delete.webp";
+    const navigate = useNavigate();
+    return (
 
         <tbody>
             {items.map(({ id, name, photo, price, qty }, index) => (
@@ -25,7 +28,7 @@ const TableBody = ({ items }) => {
                         </p>
                     </td>
                     <td className='py-2 px-4'>
-                        <QtyButton className="w-fit float-end" productId={id} />
+                        <QtyButton className="w-fit float-end" productId={id} qty={qty} />
                     </td>
                     <td className='py-2 px-4'>
                         <p className='text-green-bonek-1 font-medium text-end'>
@@ -35,10 +38,12 @@ const TableBody = ({ items }) => {
                     <td className='py-2 px-4'>
                         <img
                             role='presentation'
-                            onClick={async() => {
-                                const reply = await Product.removeFromCart(id )
-                                if(reply.success){
+                            onClick={async () => {
+                                const reply = await Product.removeFromCart(id);
+                                if (reply.success) {
+                                    navigate(Router.cart);
                                     toast.success("Berhasil menghapus dari keranjang!");
+                                    return;
                                 }
                                 toast.error("Gagal menghapus dari keranjang!");
                             }}
