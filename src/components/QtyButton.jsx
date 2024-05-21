@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Product } from '../models';
 import { toast } from 'react-toastify';
 
-const QtyButton = ({ className, productId, qty,cartId }) => {
+const QtyButton = ({ className, qty,cartId }) => {
     const [quantity, setQuantity] = useState(qty || 1);
 
     const decreaseQuantity = async () => {

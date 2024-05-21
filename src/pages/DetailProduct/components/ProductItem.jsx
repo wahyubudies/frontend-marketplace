@@ -1,13 +1,10 @@
-import {useState} from 'react'
-import { Container, QtyButton } from '../../../components';
+import { Container } from '../../../components';
 import { GeneralUtility } from '../../../utils';
 import { ThumbnailItem,ButtonQty } from "./index";
 
 const ProductItem = ({ item,handleAddToCart,decreaseQuantity,increaseQuantity,qty }) => {
    
     const { name, stock, price, merchant, description, weight, images } = item;
-
-
 
     return (
         <div className='py-10 bg-white'>
