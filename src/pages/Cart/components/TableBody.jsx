@@ -28,7 +28,7 @@ const TableBody = ({ items }) => {
                         </p>
                     </td>
                     <td className='py-2 px-4'>
-                        <QtyButton className="w-fit float-end" productId={id} qty={qty} />
+                        <QtyButton className="w-fit float-end" productId={id} qty={qty} cartId={id} />
                     </td>
                     <td className='py-2 px-4'>
                         <p className='text-green-bonek-1 font-medium text-end'>

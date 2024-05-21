@@ -1,9 +1,14 @@
+import {useState} from 'react'
 import { Container, QtyButton } from '../../../components';
 import { GeneralUtility } from '../../../utils';
-import { ThumbnailItem } from "./index";
+import { ThumbnailItem,ButtonQty } from "./index";
 
-const ProductItem = ({ item }) => {
+const ProductItem = ({ item,handleAddToCart,decreaseQuantity,increaseQuantity,qty }) => {
+   
     const { name, stock, price, merchant, description, weight, images } = item;
+
+
+
     return (
         <div className='py-10 bg-white'>
             <Container className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -42,8 +47,8 @@ const ProductItem = ({ item }) => {
                         </p>
                     </div>
                     <div className='flex items-stretch'>
-                        <QtyButton className="mr-4" />
-                        <button className='bg-blue-bonek hover:bg-black text-white font-bold py-2 px-4 rounded-2xl'>
+                       <ButtonQty decreaseQuantity={decreaseQuantity} increaseQuantity={increaseQuantity} quantity={qty}  />
+                        <button onClick={handleAddToCart} className='bg-blue-bonek hover:bg-black text-white font-bold py-2 px-4 rounded-2xl'>
                             Tambahkan ke cart
                         </button>
                     </div>

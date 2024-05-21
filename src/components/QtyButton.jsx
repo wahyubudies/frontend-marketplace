@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { Product } from '../models';
 import { toast } from 'react-toastify';
 
-const QtyButton = ({ className, productId, qty }) => {
+const QtyButton = ({ className, productId, qty,cartId }) => {
     const [quantity, setQuantity] = useState(qty || 1);
 
     const decreaseQuantity = async () => {
         if (quantity > 1) {
             const newQty = quantity - 1;
-            const reply = await Product.addToCart({
-                productId: productId,
+            const reply = await Product.updateCart({
+                cartId: cartId,
                 qty: quantity
             });
-            console.log(reply);
+
             if (reply.success) {
                 setQuantity(newQty);
                 return toast.success("Sukses menambahkan ke keranjang!");
@@ -23,8 +23,8 @@ const QtyButton = ({ className, productId, qty }) => {
 
     const increaseQuantity = async () => {
         const newQty = quantity + 1;
-        const reply = await Product.addToCart({
-            productId: productId,
+        const reply = await Product.updateCart({
+            cartId: cartId,
             qty: quantity
         });
         if (reply.success) {
