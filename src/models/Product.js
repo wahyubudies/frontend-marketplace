@@ -325,6 +325,33 @@ const addToCart = async (data) => {
     return result;
 };
 
+const addToWishlist = async (data) => {
+    const response = await RequestUtility.sendRequest({
+        method: 'post',
+        url: SERVER_ENDPOINT + "/user/wishlist",
+        data,
+        type: "json"
+    });
+
+    let result = {};
+    if (response.status === 200 || response.status === 201) {
+        result = RequestUtility.standardResponse({
+            success: true,
+            code: response.status,
+            data: response.data.data,
+            message: "Sukses menambahkan Wishlist!",
+        });
+    } else {
+        result = RequestUtility.standardResponse({
+            success: false,
+            code: response.status,
+            data: null,
+            message: response.data.message,
+        });
+    }
+    return result;
+};
+
 const getCart = async (data) => {
     const response = await RequestUtility.sendRequest({
         method: 'get',
@@ -422,6 +449,31 @@ const removeFromCart = async (productId) => {
     return result;
 };
 
+const getWishlist = async () => {
+    const response = await RequestUtility.sendRequest({
+        method: 'get',
+        url: SERVER_ENDPOINT + "/user/wishlist"
+    });
+    
+    let result = {};
+    if (response.status === 200 || response.status === 201) {
+        result = RequestUtility.standardResponse({
+            success: true,
+            code: response.status,
+            data: null,
+            message: "Sukses menampilkan Wishlist!",
+        });
+    } else {
+        result = RequestUtility.standardResponse({
+            success: false,
+            code: response.status,
+            data: null,
+            message: response.data.message,
+        });
+    }
+    return result;
+}
+
 const Product = {
     getProductList,
     getListTable,
@@ -435,7 +487,9 @@ const Product = {
     addToCart,
     getCart,
     checkout,
-    removeFromCart
+    removeFromCart,
+    addToWishlist,
+    getWishlist
 };
 
 export default Product;

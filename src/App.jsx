@@ -39,7 +39,6 @@ import {
   cartLoader,
   orderLoader
 } from "./loader";
-import Cookies from "js-cookie";
 
 const router = createBrowserRouter([
   {

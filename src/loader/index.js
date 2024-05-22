@@ -8,3 +8,4 @@ export { default as catalogLoader } from "./catalog";
 export { default as detailProductLoader } from "./detail-product";
 export { default as cartLoader } from "./cart";
 export { default as orderLoader } from "./orders";
+export { default as wishlistLoader } from "./wishlist";

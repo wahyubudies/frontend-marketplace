@@ -2,9 +2,11 @@ import React from 'react';
 import { Product } from '../models';
 import { toast } from 'react-toastify';
 import { GeneralUtility } from '../utils';
+import { useNavigate } from 'react-router-dom';
+import Router from "../route/router";
 
 const CardProduct = ({ type, item }) => {
-
+    const navigate = useNavigate();
     const WistList_BUTTON = "/img/white-star.webp";
 
     const bgContent = type === "green" ? "bg-green-bonek-1" : "bg-white";
@@ -12,6 +14,10 @@ const CardProduct = ({ type, item }) => {
     const cartIcon = type === "green" ? "/img/white-cart.webp" : "/img/green-cart.webp";
 
     const onAddToCart = async () => {
+        const userInfo = GeneralUtility.getUserInfo();
+        if (!userInfo) {
+            return navigate(Router.login);
+        }
         const reply = await Product.addToCart({
             productId: item?.id,
             qty: 1
@@ -22,10 +28,27 @@ const CardProduct = ({ type, item }) => {
         toast.error(reply.message);
     };
 
+    const addToWishlist = async () => {
+        const userInfo = GeneralUtility.getUserInfo();
+        if (!userInfo) {
+            return navigate(Router.login);
+        }
+        const reply = await Product.addToWishlist({
+            productId: item?.id
+        });
+
+        if (reply.success) {
+            return toast.success("Sukses menambahkan ke keranjang!");
+        }
+        toast.error(reply.message);
+    }
+
     return (
         <div className='w-full'>
             <div className='relative'>
-                <img src={WistList_BUTTON}
+                <img
+                    onClick={() => addToWishlist()}
+                    src={WistList_BUTTON}
                     className='absolute top-3 right-3 rounded-t-2xl w-6 h-6 cursor-pointer hover:scale-105' />
                 <img src={item?.photo}
                     className="w-full h-[250px] object-cover rounded-t-2xl"
