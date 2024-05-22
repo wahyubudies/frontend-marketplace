@@ -37,7 +37,8 @@ import {
   catalogLoader,
   detailProductLoader,
   cartLoader,
-  orderLoader
+  orderLoader,
+  wishlistLoader
 } from "./loader";
 
 const router = createBrowserRouter([
@@ -77,7 +78,8 @@ const router = createBrowserRouter([
       },
       {
         path: Router.wistlist,
-        element: <WistList />
+        element: <WistList />,
+        loader: wishlistLoader
       }
     ],
   },

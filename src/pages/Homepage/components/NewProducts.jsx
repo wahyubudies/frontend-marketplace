@@ -5,7 +5,6 @@ import Action from '../Action';
 const NewProducts = ({ products }) => {
     const [items, setItems] = useState(products);
     const [page, setPage] = useState(0);
-    console.log("🚀 ~ NewProducts ~ page:", page);
     const [total, setTotal] = useState(products.length);
 
     return (
