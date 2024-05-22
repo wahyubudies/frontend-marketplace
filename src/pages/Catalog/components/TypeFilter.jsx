@@ -1,10 +1,4 @@
-import React from 'react';
-
 const CONTENT = [
-    {
-        name: "Promo",
-        value: "promo"
-    },
     {
         name: "Baru",
         value: "new"

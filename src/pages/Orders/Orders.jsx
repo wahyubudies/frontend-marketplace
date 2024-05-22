@@ -37,7 +37,7 @@ const OrderPage = () => {
                   Total: {GeneralUtility.formatRupiah(item.totalPrice)}
                 </p>
 
-                <div className="flex border-2	w-max p-2 mt-4">
+                <div className="flex border-2	w-max p-2 mt-4 gap-2">
                   {ordersResponse !== null || ordersResponse.length > 0 ? (
                     item.productItem.map((val) => (
                       <div key={val.id}>
@@ -48,7 +48,9 @@ const OrderPage = () => {
                           alt={val.product.name}
                           width="90px"
                         />
-                        <p className="text-xs">{val.product.name}</p>
+                        <p className="text-xs w-36 truncate">
+                          {val.product.name}
+                        </p>
                         <p className="text-xs	">QTY: {val.qty}</p>
                         <p className="text-xs	">
                           Harga:{" "}

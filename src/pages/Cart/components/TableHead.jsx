@@ -1,5 +1,3 @@
-import React from 'react';
-
 const TableHead = () => {
     return (
         <thead className='bg-blue-bonek'>

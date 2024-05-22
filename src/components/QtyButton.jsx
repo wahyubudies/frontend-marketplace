@@ -8,13 +8,15 @@ const QtyButton = ({ className, qty,cartId }) => {
     const decreaseQuantity = async () => {
         if (quantity > 1) {
             const newQty = quantity - 1;
+            setQuantity(newQty);
+
             const reply = await Product.updateCart({
                 cartId: cartId,
-                qty: quantity
+                qty: newQty
             });
-
+            
             if (reply.success) {
-                setQuantity(newQty);
+                window.location.reload()
                 return toast.success("Sukses menambahkan ke keranjang!");
             }
             toast.error(reply.message);
@@ -23,17 +25,21 @@ const QtyButton = ({ className, qty,cartId }) => {
 
     const increaseQuantity = async () => {
         const newQty = quantity + 1;
+        setQuantity(newQty);
         const reply = await Product.updateCart({
             cartId: cartId,
-            qty: quantity
+            qty: newQty
         });
+
         if (reply.success) {
-            setQuantity(newQty);
+            window.location.reload()
             return toast.success("Sukses menambahkan ke keranjang!");
+        
         }
         toast.error(reply.message);
     };
-
+    
+console.log(qty);
     return (
         <div className={`flex items-center border bg-slate-400 rounded-2xl ${className}`}>
             <button className="text-slate-800 px-3 py-1" onClick={decreaseQuantity}>
