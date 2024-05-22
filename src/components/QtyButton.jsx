@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Product } from '../models';
 import { toast } from 'react-toastify';
 
-const QtyButton = ({ className, productId, qty }) => {
+const QtyButton = ({ className, qty,cartId }) => {
     const [quantity, setQuantity] = useState(qty || 1);
 
     const decreaseQuantity = async () => {
         if (quantity > 1) {
             const newQty = quantity - 1;
-            const reply = await Product.addToCart({
-                productId: productId,
-                qty: quantity
+            setQuantity(newQty);
+
+            const reply = await Product.updateCart({
+                cartId: cartId,
+                qty: newQty
             });
-            console.log(reply);
+            
             if (reply.success) {
-                setQuantity(newQty);
+                window.location.reload()
                 return toast.success("Sukses menambahkan ke keranjang!");
             }
             toast.error(reply.message);
@@ -23,17 +25,21 @@ const QtyButton = ({ className, productId, qty }) => {
 
     const increaseQuantity = async () => {
         const newQty = quantity + 1;
-        const reply = await Product.addToCart({
-            productId: productId,
-            qty: quantity
+        setQuantity(newQty);
+        const reply = await Product.updateCart({
+            cartId: cartId,
+            qty: newQty
         });
+
         if (reply.success) {
-            setQuantity(newQty);
+            window.location.reload()
             return toast.success("Sukses menambahkan ke keranjang!");
+        
         }
         toast.error(reply.message);
     };
-
+    
+console.log(qty);
     return (
         <div className={`flex items-center border bg-slate-400 rounded-2xl ${className}`}>
             <button className="text-slate-800 px-3 py-1" onClick={decreaseQuantity}>

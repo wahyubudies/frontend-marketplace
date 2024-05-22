@@ -43,8 +43,40 @@ const getListOrder = async () => {
   };
 
   
+  const proofPayment = async (data) => {
+    const response = await RequestUtility.sendRequest({
+      method: "PUT",
+      url: SERVER_ENDPOINT + "/user/checkout-payment",
+      data,
+      type: "form",
+    });
+  
+    let result = {};
+    if (response.status === 200 || response.status === 201) {
+  
+      result = RequestUtility.standardResponse({
+        success: true,
+        code: response.status,
+        data: response.data,
+        message: "update berhasil",
+      });
+    } else {
+      result = RequestUtility.standardResponse({
+        success: false,
+        code: response.status,
+        data: null,
+        message: response.data.message,
+      });
+    }
+    return result;
+  };
+
+
+
+
 const Order = {
-    getListOrder
+    getListOrder,
+    proofPayment
   };
   
   export default Order;

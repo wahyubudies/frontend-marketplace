@@ -352,6 +352,34 @@ const addToWishlist = async (data) => {
     return result;
 };
 
+const updateCart = async (data) => {
+    const response = await RequestUtility.sendRequest({
+        method: 'put',
+        url: SERVER_ENDPOINT + "/user/cart",
+        data,
+        type: "json"
+    });
+
+    let result = {};
+    if (response.status === 200 || response.status === 201) {
+        result = RequestUtility.standardResponse({
+            success: true,
+            code: response.status,
+            data: response.data.data,
+            message: "update qty cart berhasil",
+        });
+    } else {
+        result = RequestUtility.standardResponse({
+            success: false,
+            code: response.status,
+            data: null,
+            message: response.data.message,
+        });
+    }
+    return result;
+};
+
+
 const getCart = async (data) => {
     const response = await RequestUtility.sendRequest({
         method: 'get',
@@ -489,7 +517,8 @@ const Product = {
     checkout,
     removeFromCart,
     addToWishlist,
-    getWishlist
+    getWishlist,
+    updateCart
 };
 
 export default Product;

@@ -1,6 +1,3 @@
-import React from 'react';
-import { QtyButton } from '../../../components';
-
 const TableBody = () => {
     const TRASH_BUTTON = "/img/button-delete.webp";
     return (

@@ -6,7 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import Router from '../../../route/router';
 import { GeneralUtility } from '../../../utils';
 const TableFoot = ({ totalPrice, items }) => {
+    
     const navigate = useNavigate();
+
     return (
         <tfoot>
             <tr>
