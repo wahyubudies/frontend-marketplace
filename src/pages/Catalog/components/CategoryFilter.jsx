@@ -1,7 +1,6 @@
 import React from 'react';
 
 const CategoryFilter = ({ categories }) => {
-    console.log("🚀 ~ CategoryFilter ~ categories:", categories);
     return (
         <div className='gap-2 grid h-full'>
             <div>

@@ -5,7 +5,6 @@ import Router from '../../route/router';
 
 const Cart = () => {
     const cart = useLoaderData();
-    console.log("🚀 ~ Cart ~ cart:", cart);
     const navigate = useNavigate();
     return (
         <div className='py-10 bg-white'>

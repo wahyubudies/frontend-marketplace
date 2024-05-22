@@ -38,8 +38,6 @@ const QtyButton = ({ className, qty,cartId }) => {
         }
         toast.error(reply.message);
     };
-    
-console.log(qty);
     return (
         <div className={`flex items-center border bg-slate-400 rounded-2xl ${className}`}>
             <button className="text-slate-800 px-3 py-1" onClick={decreaseQuantity}>

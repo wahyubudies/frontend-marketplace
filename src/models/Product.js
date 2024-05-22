@@ -325,6 +325,33 @@ const addToCart = async (data) => {
     return result;
 };
 
+const addToWishlist = async (data) => {
+    const response = await RequestUtility.sendRequest({
+        method: 'post',
+        url: SERVER_ENDPOINT + "/user/wishlist",
+        data,
+        type: "json"
+    });
+
+    let result = {};
+    if (response.status === 200 || response.status === 201) {
+        result = RequestUtility.standardResponse({
+            success: true,
+            code: response.status,
+            data: response.data.data,
+            message: "Sukses menambahkan Wishlist!",
+        });
+    } else {
+        result = RequestUtility.standardResponse({
+            success: false,
+            code: response.status,
+            data: null,
+            message: response.data.message,
+        });
+    }
+    return result;
+};
+
 const updateCart = async (data) => {
     const response = await RequestUtility.sendRequest({
         method: 'put',
@@ -371,14 +398,14 @@ const getCart = async (data) => {
     const totalPrice = formattedData.reduce((total, item) => {
         return total + (item.price * item.qty);
     }, 0);
-    
+
     let result = {};
     if (response.status === 200 || response.status === 201) {
         result = RequestUtility.standardResponse({
             success: true,
             code: response.status,
-            data: { 
-                items: formattedData, 
+            data: {
+                items: formattedData,
                 totalPrice
             },
             message: "Sukses menampilkan products!",
@@ -395,14 +422,14 @@ const getCart = async (data) => {
 };
 
 const checkout = async (data) => {
-    
+
     const response = await RequestUtility.sendRequest({
         method: 'post',
         url: SERVER_ENDPOINT + "/user/checkout",
         data,
-        type:"json"
+        type: "json"
     });
-    
+
     let result = {};
     if (response.status === 200 || response.status === 201) {
         result = RequestUtility.standardResponse({
@@ -426,11 +453,11 @@ const removeFromCart = async (productId) => {
     const response = await RequestUtility.sendRequest({
         method: 'delete',
         url: SERVER_ENDPOINT + "/user/cart/",
-        data:{
-            cartId:productId
+        data: {
+            cartId: productId
         }
     });
-    
+
     let result = {};
     if (response.status === 200 || response.status === 201) {
         result = RequestUtility.standardResponse({
@@ -438,6 +465,63 @@ const removeFromCart = async (productId) => {
             code: response.status,
             data: null,
             message: "Sukses menampilkan products!",
+        });
+    } else {
+        result = RequestUtility.standardResponse({
+            success: false,
+            code: response.status,
+            data: null,
+            message: response.data.message,
+        });
+    }
+    return result;
+};
+const removeFromWishlist = async (wishlistId) => {
+    const response = await RequestUtility.sendRequest({
+        method: 'delete',
+        url: SERVER_ENDPOINT + "/user/wishlist",
+        data: {
+            id: wishlistId
+        }
+    });
+
+    let result = {};
+    if (response.status === 200 || response.status === 201) {
+        result = RequestUtility.standardResponse({
+            success: true,
+            code: response.status,
+            data: null,
+            message: "Sukses product dari Wishlist!",
+        });
+    } else {
+        result = RequestUtility.standardResponse({
+            success: false,
+            code: response.status,
+            data: null,
+            message: response.data.message,
+        });
+    }
+    return result;
+};
+
+const getWishlist = async () => {
+    const response = await RequestUtility.sendRequest({
+        method: 'get',
+        url: SERVER_ENDPOINT + "/user/wishlist"
+    });
+
+    const formattedData = response.data.data.map((item) => ({
+        ...item,
+        productCoverImage: SERVER_URL + "/" + item.product.imageProduct[0].image
+    }));
+
+    let result = {};
+    if (response.status === 200 || response.status === 201) {
+        result = RequestUtility.standardResponse({
+            success: true,
+            code: response.status,
+            data: formattedData,
+            message: "Sukses menampilkan Wishlist!",
         });
     } else {
         result = RequestUtility.standardResponse({
@@ -464,6 +548,9 @@ const Product = {
     getCart,
     checkout,
     removeFromCart,
+    removeFromWishlist,
+    addToWishlist,
+    getWishlist,
     updateCart
 };
 
