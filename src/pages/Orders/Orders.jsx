@@ -24,7 +24,6 @@ const OrderPage = () => {
     return !specificItem;
   };
 
-  console.log(orders);
   return (
     <div>
       <h2>History Order</h2>
