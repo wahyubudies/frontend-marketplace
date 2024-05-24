@@ -1,20 +1,28 @@
 const CONTENT = [
     {
         name: "Baru",
-        value: "new"
+        value: 1,
     },
     {
         name: "Terlaris",
-        value: "best_seller"
+        value: 0,
     },
 ];
+
 const TypeFilter = () => {
+
     return (
         <div className="relative flex flex-col text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
             <nav className="flex flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700 w-full">
                 {CONTENT.map(({ name, value }, index) => (
                     <div role="button" key={index}
-                        className="flex items-center w-full p-0 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-green-bonek-1 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-green-bonek-1 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-green-bonek-1">
+                    onClick={() => {
+                        const urlParams = new URL(window.location.href);
+                        const urlProductName = urlParams.searchParams.get('name') || "";
+                        const categoryId = urlParams.searchParams.get('categoryId') || "";
+                        window.location.href = `/catalog?name=${urlProductName}&type=${value}&categoryId=${categoryId}`;
+                    }}
+                        className={`flex items-center w-full p-0 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-green-bonek-1 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-green-bonek-1 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-green-bonek-1`}>
                         <label htmlFor={`${value}_filter`} className="flex items-center w-full px-3 py-2 cursor-pointer">
                             <div className="grid mr-3 place-items-center">
                                 <div className="inline-flex items-center">

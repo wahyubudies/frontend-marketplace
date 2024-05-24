@@ -12,9 +12,27 @@ const formatRupiah = (price) => {
     return 'Rp ' + value;
 }
 
+const months = (options) => {
+    const count = options.count || 12; 
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+  
+    const monthLabels = [];
+    for (let i = count - 1; i >= 0; i--) {
+      const date = new Date(currentYear, currentMonth - i, 1);
+      const monthLabel = date.toLocaleString('default', { month: 'long' });
+      monthLabels.push(monthLabel);
+    }
+  
+    return monthLabels;
+  };
+  
+
 const GeneralUtility = {
     getUserInfo,
-    formatRupiah
+    formatRupiah,
+    months
 };
 
 export default GeneralUtility;

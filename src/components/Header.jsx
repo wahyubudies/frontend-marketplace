@@ -3,6 +3,7 @@ import Container from './Container';
 import { NavLink } from 'react-router-dom';
 import Router from "../route/router";
 import { useSelector } from 'react-redux';
+import GeneralUtility from '../utils/general'
 
 const Header = () => {
     const LOGO = "/img/logo.webp";
@@ -21,6 +22,19 @@ const Header = () => {
         const urlProductName = urlParams.searchParams.get('name') || "";
         setUrlProductName(urlProductName);
     }, []);
+
+    const handleTo = () =>{
+        const role = GeneralUtility.getUserInfo().role
+        if(role === "user"){
+            window.location.href = Router.admin.orders['list-orders']
+        } else if(role === "admin"){
+            window.location.href = Router.admin
+        } else if(role === "merchant"){
+            window.location.href = Router.admin.product.gallery
+        } else{
+            window.location.href = Router.login
+        }
+    }
 
 
     return (
@@ -65,7 +79,7 @@ const Header = () => {
                     </li>
                     <li>
                         {isLoggedIn ? (
-                            <button onClick={() => window.location.href = Router.admin.home}
+                            <button onClick={handleTo}
                                 className={`bg-slate-500 hover:bg-black text-white font-bold py-2 px-4 rounded-2xl flex items-center`}>
                                 <img src={USER_ICON} alt='' className='w-5 h-6 object-contain mr-2' /> Profile
                             </button>

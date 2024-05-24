@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Product } from "../../../models";
 import { toast } from "react-toastify";
 import Router from "../../../route/router";
+import { GeneralUtility } from "../../../utils";
 
 const TableBody = ({ items }) => { 
     const TRASH_BUTTON = "/img/button-delete.webp";
@@ -20,7 +21,7 @@ const TableBody = ({ items }) => {
                     </td>
                     <td className='py-2 px-4'>
                         <p className='text-green-bonek-1 font-medium text-end'>
-                            Rp{item.product.price}
+                            {GeneralUtility.formatRupiah(item.product.price)}
                         </p>
                     </td>
                     <td className='py-2 px-4'>

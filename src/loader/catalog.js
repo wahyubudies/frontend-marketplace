@@ -7,14 +7,14 @@ const getCategories = async () => {
 const getProducts = async ({
     name,
     type,
-    categoryId
+    categoryId,
 }) => {
     const params = {
         offset: 0,
         limit: 8,
+        name,
         type,
         categoryId,
-        name
     }
     return await Product.getProductList(params);
 };
@@ -32,7 +32,7 @@ const catalogLoader = async ({
         getProducts({
             name,
             type,
-            categoryId
+            categoryId,
         })
     ]);
 

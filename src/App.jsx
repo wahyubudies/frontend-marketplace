@@ -38,7 +38,8 @@ import {
   detailProductLoader,
   cartLoader,
   orderLoader,
-  wishlistLoader
+  wishlistLoader,
+  
 } from "./loader";
 
 const router = createBrowserRouter([
@@ -89,7 +90,8 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Dashboard />
+        element: <Dashboard />,
+        loader: orderLoader,
       },
       {
         path: Router.admin.category.home,

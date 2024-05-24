@@ -1,5 +1,3 @@
-import React from 'react';
-
 const CategoryFilter = ({ categories }) => {
     return (
         <div className='gap-2 grid h-full'>
@@ -18,9 +16,8 @@ const CategoryFilter = ({ categories }) => {
                         const urlType = urlParams.searchParams.get('type') || "";
                         window.location.href = `/catalog?name=${urlProductName}&type=${urlType}&categoryId=${urlProductCategoryId}`;
                     }}
-                    className='hover:bg-white text-white   hover:text-green-bonek-1 py-2 px-4 rounded-lg cursor-pointer' key={index}>
+                    className='hover:bg-white text-white hover:text-green-bonek-1 py-2 px-4 rounded-lg cursor-pointer' key={index}>
                     <p
-
                         className='font-medium tracking-wider'>
                         {name}
                     </p>

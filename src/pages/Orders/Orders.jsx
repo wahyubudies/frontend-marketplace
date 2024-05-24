@@ -5,7 +5,7 @@ import action from "./Action";
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 const OrderPage = () => {
-  const ordersResponse = useLoaderData();
+  const {orders} = useLoaderData();
 
   const [form, setForm] = useState({
     orderId: "",
@@ -24,12 +24,13 @@ const OrderPage = () => {
     return !specificItem;
   };
 
+  console.log(orders);
   return (
     <div>
       <h2>History Order</h2>
       <div className="gap-2 flex flex-col">
-        {ordersResponse !== null ? (
-          ordersResponse.map((item) => (
+        {orders !== null ? (
+          orders.map((item) => (
             <div key={item.id} className="bg-slate-50 p-4 flex justify-between">
               <div>
                 <p className="font-semibold text-zinc-900">{item.code}</p>
@@ -38,7 +39,7 @@ const OrderPage = () => {
                 </p>
 
                 <div className="flex border-2	w-max p-2 mt-4 gap-2">
-                  {ordersResponse !== null || ordersResponse.length > 0 ? (
+                  {orders !== null || orders.length > 0 ? (
                     item.productItem.map((val) => (
                       <div key={val.id}>
                         <img
